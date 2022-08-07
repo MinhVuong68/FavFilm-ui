@@ -1,0 +1,30 @@
+.container {
+    height: 56px;
+    padding: 0 28px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e8ebed;
+}
+
+.left,
+.center,
+.right {
+    flex: 1 1;
+}
+
+.center {
+    display: flex;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+}
+.logo {
+    margin-right: 8px;
+}
+.title {
+    font-size: 1.8rem;
+}
