@@ -22,6 +22,9 @@ const Search = () => {
         inputSearch.current.focus();
         setShowResultSearch(false);
     };
+    const handleHideResultSearch = () => {
+        setShowResultSearch(false);
+    };
     return (
         <div className={cx('container')}>
             <div>
@@ -43,6 +46,7 @@ const Search = () => {
                             </div>
                         </div>
                     )}
+                    onClickOutside={handleHideResultSearch}
                 >
                     <div className={cx('wrapper')}>
                         <input
