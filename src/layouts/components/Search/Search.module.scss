@@ -62,16 +62,13 @@
 .search-result {
     width: 420px;
     margin-top: -8px;
-    min-height: 100px;
-    padding: 16px 0 8px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
-    max-height: min((100vh - 96px) - 60px, 734px);
+    max-height: 300px;
 }
 
 .search-header {
     display: flex;
+    border-bottom: 1px solid #e8ebed;
+    padding-bottom: 16px;
     p {
         font-size: 1.4rem;
         color: #333;
@@ -100,4 +97,29 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+// list search result
+.result {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    color: #222;
+    line-height: 32px;
+    padding: 0px 24px 0px 10px;
+    font-weight: 400;
+
+    b {
+    }
+}
+
+.spacer {
+    margin-right: 10px;
+}
+
+.no-result {
+    padding-top: 4px;
+    font-weight: 200;
+    font-size: 1.4rem;
+    text-align: center;
 }

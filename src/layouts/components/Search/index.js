@@ -1,10 +1,11 @@
 import { faMicrophone, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
 
 import { CloseIcon, SearchIcon } from '~/Icons';
+import Wrapper from '~/components/Popper';
 
 import styles from './Search.module.scss';
 
@@ -14,8 +15,32 @@ const Search = () => {
     const inputSearch = useRef();
     const [searchValue, setSearchValue] = useState('');
     const [showResutSearch, setShowResultSearch] = useState(true);
-
+    const [listSearch, setListSearch] = useState([]);
+    const [loading, setLoading] = useState(true);
     console.log(searchValue);
+
+    useEffect(() => {
+        setLoading(true);
+        if (searchValue.trim().length === 0) {
+            setListSearch([]);
+            setShowResultSearch(false);
+            return;
+        }
+        fetch(
+            `https://api.themoviedb.org/3/search/movie?api_key=e9e9d8da18ae29fc430845952232787c&query=${encodeURIComponent(
+                searchValue,
+            )}`,
+        )
+            .then((res) => res.json())
+            .then((res) => {
+                setListSearch(res.results);
+                setShowResultSearch(true);
+                setLoading(false);
+            })
+            .catch(() => setLoading(false));
+        console.log(listSearch);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchValue]);
 
     const handleClose = () => {
         setSearchValue('');
@@ -29,21 +54,40 @@ const Search = () => {
         <div className={cx('container')}>
             <div>
                 <Tippy
-                    visible={showResutSearch}
+                    visible={showResutSearch && searchValue.length > 0}
                     interactive={true}
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <div className={cx('search-header')}>
-                                <div className={cx('icons')}>
-                                    <div className={cx('icon-search')}>
-                                        <SearchIcon width="1.6rem" height="1.6rem" />
+                            <Wrapper>
+                                {!!searchValue && (
+                                    <div className={cx('search-header')}>
+                                        <div className={cx('icons')}>
+                                            {!loading ? (
+                                                <div className={cx('icon-search')}>
+                                                    <SearchIcon width="1.6rem" height="1.6rem" />
+                                                </div>
+                                            ) : (
+                                                <div className={cx('icon-loading')}>
+                                                    <FontAwesomeIcon icon={faSpinner} />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <p>Kết quả tìm kiếm '{searchValue}'</p>
                                     </div>
-                                    <div className={cx('icon-loading')}>
-                                        <FontAwesomeIcon icon={faSpinner} />
-                                    </div>
-                                </div>
-                                <p>Kết quả tìm kiếm '{searchValue}'</p>
-                            </div>
+                                )}
+                                {listSearch.length > 0 &&
+                                    listSearch.map((item) => {
+                                        return (
+                                            <div className={cx('result')}>
+                                                <SearchIcon width="1.6rem" height="1.6rem" className={cx('spacer')} />
+                                                <b>{item.title}</b>
+                                            </div>
+                                        );
+                                    })}
+                                {!!searchValue && listSearch.length === 0 && (
+                                    <p className={cx('no-result')}>Không tìm thấy!</p>
+                                )}
+                            </Wrapper>
                         </div>
                     )}
                     onClickOutside={handleHideResultSearch}
@@ -56,6 +100,7 @@ const Search = () => {
                             type="text"
                             placeholder="Tìm kiếm phim tại đây"
                             onChange={(e) => setSearchValue(e.target.value)}
+                            onFocus={() => setShowResultSearch(true)}
                             spellCheck={false}
                         />
                         {!!searchValue && (
