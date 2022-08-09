@@ -6,6 +6,7 @@ import Tippy from '@tippyjs/react/headless';
 
 import { CloseIcon, SearchIcon } from '~/Icons';
 import Wrapper from '~/components/Popper';
+import FilmItemSearch from '~/layouts/components/FilmItemSearch';
 
 import styles from './Search.module.scss';
 
@@ -77,12 +78,7 @@ const Search = () => {
                                 )}
                                 {listSearch.length > 0 &&
                                     listSearch.map((item) => {
-                                        return (
-                                            <div className={cx('result')}>
-                                                <SearchIcon width="1.6rem" height="1.6rem" className={cx('spacer')} />
-                                                <b>{item.title}</b>
-                                            </div>
-                                        );
+                                        return <FilmItemSearch data={item} />;
                                     })}
                                 {!!searchValue && listSearch.length === 0 && (
                                     <p className={cx('no-result')}>Không tìm thấy!</p>

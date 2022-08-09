@@ -1,0 +1,21 @@
+.result {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    color: #222;
+    line-height: 32px;
+    padding: 0px 24px 0px 10px;
+    font-weight: 400;
+    &:hover {
+        background-color: #eeeeee;
+    }
+    a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.spacer {
+    margin-right: 10px;
+}
