@@ -60,29 +60,31 @@ const Search = () => {
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <Wrapper>
-                                {!!searchValue && (
-                                    <div className={cx('search-header')}>
-                                        <div className={cx('icons')}>
-                                            {!loading ? (
-                                                <div className={cx('icon-search')}>
-                                                    <SearchIcon width="1.6rem" height="1.6rem" />
-                                                </div>
-                                            ) : (
-                                                <div className={cx('icon-loading')}>
-                                                    <FontAwesomeIcon icon={faSpinner} />
-                                                </div>
-                                            )}
+                                <div className={cx('box')}>
+                                    {!!searchValue && (
+                                        <div className={cx('search-header')}>
+                                            <div className={cx('icons')}>
+                                                {!loading ? (
+                                                    <div className={cx('icon-search')}>
+                                                        <SearchIcon width="1.6rem" height="1.6rem" />
+                                                    </div>
+                                                ) : (
+                                                    <div className={cx('icon-loading')}>
+                                                        <FontAwesomeIcon icon={faSpinner} />
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <p>Kết quả tìm kiếm '{searchValue}'</p>
                                         </div>
-                                        <p>Kết quả tìm kiếm '{searchValue}'</p>
-                                    </div>
-                                )}
-                                {listSearch.length > 0 &&
-                                    listSearch.map((item) => {
-                                        return <FilmItemSearch data={item} />;
-                                    })}
-                                {!!searchValue && listSearch.length === 0 && (
-                                    <p className={cx('no-result')}>Không tìm thấy!</p>
-                                )}
+                                    )}
+                                    {listSearch.length > 0 &&
+                                        listSearch.slice(0, 7).map((item) => {
+                                            return <FilmItemSearch data={item} />;
+                                        })}
+                                    {!!searchValue && listSearch.length === 0 && (
+                                        <p className={cx('no-result')}>Không tìm thấy!</p>
+                                    )}
+                                </div>
                             </Wrapper>
                         </div>
                     )}

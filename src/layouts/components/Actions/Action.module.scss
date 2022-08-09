@@ -1,0 +1,91 @@
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.bell-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+
+.avatar {
+    padding: 0 6px;
+    margin-left: 16px;
+    img {
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+
+.notify-box {
+    width: 456px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    min-height: 48px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    h2 {
+        font-size: 1.6rem;
+        color: #030303;
+        line-height: 2.2rem;
+        font-weight: 400;
+        margin-left: 16px;
+        flex: 1;
+    }
+}
+
+.content {
+    //flex: 1;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 575px;
+    .desc-noti {
+        width: 280px;
+    }
+    .desc-noti-1 {
+        margin-bottom: 8px;
+        font-family: 'Roboto', 'Arial', sans-serif;
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+        font-weight: 600;
+        text-align: center;
+    }
+    p {
+        margin-top: 8px;
+        font-family: 'Roboto', 'Arial', sans-serif;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        font-weight: 400;
+        text-align: center;
+    }
+}
+
+.bell-box-noti {
+    color: #909090;
+    margin-bottom: 24px;
+}
+
+@keyframes popper-enter-animation {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

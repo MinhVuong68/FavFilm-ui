@@ -28,3 +28,9 @@
 .title {
     font-size: 1.8rem;
 }
+
+.right {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}

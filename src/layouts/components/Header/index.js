@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import Search from '~/layouts/components/Search';
+import Actions from '~/layouts/components/Actions';
 
 import styles from './Header.module.scss';
 
@@ -20,7 +21,9 @@ const Header = () => {
             <div className={cx('center')}>
                 <Search />
             </div>
-            <div className={cx('right')}></div>
+            <div className={cx('right')}>
+                <Actions />
+            </div>
         </div>
     );
 };
