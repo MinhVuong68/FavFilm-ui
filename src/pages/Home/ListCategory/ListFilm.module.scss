@@ -1,0 +1,56 @@
+.list-film {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    margin: 20px -10px 0;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.category {
+    margin-top: 30px;
+}
+
+.title {
+    h3 {
+        font-weight: bold;
+        font-size: 2.5rem;
+        margin-right: 20px;
+    }
+    a {
+        color: rgb(74 198 210/1);
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.item-film {
+    width: 25%;
+    min-height: 530px;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    text-decoration: none;
+
+    img {
+        background-color: rgba(0, 0, 0, 0.1);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 16px;
+        display: block;
+        object-fit: cover;
+        overflow: hidden;
+        width: 100%;
+    }
+    h4 {
+        margin: 10px 0;
+        transition: 0.3s ease;
+        &:hover {
+            color: rgb(74 198 210/1);
+        }
+    }
+}

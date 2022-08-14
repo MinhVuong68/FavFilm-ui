@@ -1,0 +1,23 @@
+.item-sub {
+    padding: 0 24px;
+    min-width: 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        background-color: #ccc;
+    }
+    h5 {
+        flex: 1;
+        color: #030303;
+        font-family: 'Roboto', 'Arial', sans-serif;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        font-weight: 400;
+    }
+}
+
+.icon-sub-menu {
+    margin-right: 24px;
+}

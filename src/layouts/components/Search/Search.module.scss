@@ -29,6 +29,9 @@
 }
 
 .button-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #ccc;
     background-color: #f8f8f8;
     color: #7c7c7c;
@@ -55,6 +58,7 @@
     border-radius: 50%;
     width: 40px;
     height: 40px;
+
     cursor: pointer;
 }
 

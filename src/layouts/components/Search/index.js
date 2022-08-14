@@ -9,6 +9,8 @@ import Wrapper from '~/components/Popper';
 import FilmItemSearch from '~/layouts/components/FilmItemSearch';
 
 import styles from './Search.module.scss';
+import favFilmApi from '~/api/favFilmApi';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +21,6 @@ const Search = () => {
     const [listSearch, setListSearch] = useState([]);
     const [loading, setLoading] = useState(true);
     console.log(searchValue);
-
     useEffect(() => {
         setLoading(true);
         if (searchValue.trim().length === 0) {
@@ -27,19 +28,35 @@ const Search = () => {
             setShowResultSearch(false);
             return;
         }
-        fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=e9e9d8da18ae29fc430845952232787c&query=${encodeURIComponent(
-                searchValue,
-            )}`,
-        )
-            .then((res) => res.json())
-            .then((res) => {
-                setListSearch(res.results);
+
+        const getMoviesListByName = async () => {
+            const params = { query: searchValue };
+            try {
+                const response = await favFilmApi.getMoviesListByName({ params });
+                setListSearch(response.results);
+                console.log(response.results);
                 setShowResultSearch(true);
                 setLoading(false);
-            })
-            .catch(() => setLoading(false));
-        console.log(listSearch);
+            } catch (error) {
+                setLoading(false);
+                console.log('error');
+            }
+        };
+        getMoviesListByName();
+
+        // fetch(
+        //     `https://api.themoviedb.org/3/search/movie?api_key=e9e9d8da18ae29fc430845952232787c&query=${encodeURIComponent(
+        //         searchValue,
+        //     )}`,
+        // )
+        //     .then((res) => res.json())
+        //     .then((res) => {
+        //         setListSearch(res.results);
+        //         setShowResultSearch(true);
+        //         setLoading(false);
+        //     })
+        //     .catch(() => setLoading(false));
+        // console.log(listSearch);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchValue]);
 
@@ -51,9 +68,11 @@ const Search = () => {
     const handleHideResultSearch = () => {
         setShowResultSearch(false);
     };
+    //console.log(showResutSearch, searchValue.length);
     return (
         <div className={cx('container')}>
             <div>
+                {console.log(searchValue.length > 0)}
                 <Tippy
                     visible={showResutSearch && searchValue.length > 0}
                     interactive={true}
@@ -79,7 +98,7 @@ const Search = () => {
                                     )}
                                     {listSearch.length > 0 &&
                                         listSearch.slice(0, 7).map((item) => {
-                                            return <FilmItemSearch data={item} />;
+                                            return <FilmItemSearch data={item} key={item.id} />;
                                         })}
                                     {!!searchValue && listSearch.length === 0 && (
                                         <p className={cx('no-result')}>Không tìm thấy!</p>
@@ -109,9 +128,9 @@ const Search = () => {
                     </div>
                 </Tippy>
             </div>
-            <button className={cx('button-search')}>
+            <Link className={cx('button-search')} to={`/movie/results/${searchValue}`}>
                 <SearchIcon />
-            </button>
+            </Link>
             <div className={cx('micro-icon')}>
                 <FontAwesomeIcon icon={faMicrophone} />
             </div>
